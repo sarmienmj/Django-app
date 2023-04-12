@@ -1,0 +1,179 @@
+{% extends 'pos_base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #527821;">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <span class="navbar-brand mb-0 h1">LOGO</span>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-5 me-auto mb-2 mb-lg-0">
+          <li  id="boton-listar-pedidos"class="nav-item ms-5"style="background-color: #467012; padding: 10px; cursor: pointer;">
+            <span class="navbar-text">Pedidos</span>
+          </li>
+        </ul>
+        <a class="nav-link " style="background-color: #467012; color: black; cursor: pointer;" href="">Cerrar</a>
+       </div>
+    </div>
+</nav>
+<div id="lista-pedidos-div" class="container-fluid vh-100 overflow-auto" style="background-color: #B6BAB3; position: absolute; display: none;">
+  <div class="row">
+    <div class="col">
+
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-5 me-auto mb-2 mb-lg-0">
+              <li  class="nav-item ms-5"style="background-color: #467012; padding: 10px; cursor: pointer;">
+                <span class="navbar-text">Nuevo</span>
+              </li>
+              <li id="cerrar-listado-pedidos"  class="nav-item ms-5"style="background-color: #467012; padding: 10px; cursor: pointer;">
+                <span class="navbar-text">Cerrar</span>
+              </li>
+              <li class="nav-item ms-5">
+                <form action="">
+                  <div class="">
+                      <input type="input" class="form-control" id="buscar" placeholder="Buscar Pedido..." style="border-radius: 0px;">
+                    </div>
+                </form>
+              </li>
+            </ul>
+            
+           </div>
+        </div>
+      </nav>
+
+      <div class="container">
+        <table class="table table-hover table-bordered table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Numero de Pedido</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Cajero</th>
+              <th scope="col">Total</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-pedidos">
+
+            <tr>
+              <th scope="row">pedido.fecha</th>
+              <td>pedido.id</td>
+              <td>pedido.Cliente</td>
+              <td>pedido.cajero</td>
+              <td>pedido.total</td>
+              <td>pedido.status</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+	<div class="row ">
+    <div class="col">
+      <div class="row">
+      <div id="lista-de-pedidos" class="border overflow-auto border-bottom border-success-subtle" style="height: 400px;">
+      </div>
+    </div>
+      <div class="row">
+        <div class="border">
+        <h4 id="precio-total">Total: 0.00$ // 0.00 Bs.F</h4>
+        </div>
+      </div>
+      
+      <div class="border row">
+        <div class="col-6">
+          <h4>Cliente</h4>
+        </div>
+        <div class="col-6 border-start">
+          <h4>Informacion</h4>
+        </div>
+      </div>
+
+      <div class="row h-auto">
+        <div class="col-4 border d-flex justify-content-center align-items-stretch">
+          <button id="botonGuardarPedido" type="button" class="btn btn-success">Guardar Pedido</button>
+        </div>
+        <div class="col-8 border  ">
+          <div class="row border">
+            <div id="boton-1" class="col-3 apuntar hover-gris boton-calculadora border"><p>1</p></div>
+            <div id="boton-2" class="col-3 apuntar boton-calculadora border"><p>2</p></div>
+            <div id="boton-3" class="col-3 apuntar boton-calculadora border"><p>3</p></div>
+            <div id="boton-cantidad" class="col-3 apuntar boton-calculador border"><p>Cant.</p></div>
+          </div>
+          <div class="row border">
+            <div id="boton-4" class="col-3 apuntar boton-calculadora border"><p>4</p></div>
+            <div id="boton-5" class="col-3 apuntar boton-calculadora border"><p>5</p></div>
+            <div id="boton-6" class="col-3 apuntar boton-calculadora border"><p>6</p></div>
+            <div id="boton-precio" class="col-3 apuntar boton-calculador border"><p>Prec.</p></div>
+          </div>
+          <div class="row border">
+            <div id="boton-7" class="col-3 apuntar boton-calculadora border"><p>7</p></div>
+            <div id="boton-8" class="col-3 apuntar boton-calculadora border"><p>8</p></div>
+            <div id="boton-9" class="col-3 apuntar boton-calculadora border"><p>9</p></div>
+            <div id="boton-borrar" class="col-3 apuntar boton-calculador border"><img src="{% static '/backspace-fill.svg' %}"/> </div>
+          </div>
+          <div class="row border">
+            <div class="col-3 apuntar boton-calculador border"></div>
+            <div id="boton-0" class="col-3 apuntar boton-calculadora border"><p>0</p></div>
+            <div id="coma" class="col-3 apuntar boton-calculadora border">,</div>
+            <div id="boton-enter" class="col-3 apuntar boton-calculadora border">Enter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+		
+		<div class="col-md-8 vh-100" style="background-color: #B6BAB3;">
+            <div class="row m-1">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <form action="">
+                        <div class="">
+                            <input id="buscar-productos">
+                          </div>
+                    </form>
+                </div>
+            </div>
+            <div id="divCategorias" class="d-flex gap-2 flex-wrap">
+              {% for categoria in categorias %}
+              <div class="p-2 bg-white apuntar text-center border rounded filtrar-por-categoria" id="categoria-div-{{categoria.id}}" >
+                <p style="display: none;">{{categoria.id}}-{{categoria.nombre}}</p>
+                <div class="overflow-hidden p-2 text-center" style="width: 100px; height: 100px;">
+                  <img src="{{categoria.imagen}}" class="img-fluid rounded-top " alt="" style="width: 200px;">
+                </div>
+                <ul class="list-inline">
+                  <li class="list-inline-item text-capitalize"><p class="fw-semibold fs-6">{{categoria.nombre}}</p></li>
+                </ul>
+            </div>
+              {% endfor %}
+            </div>
+            <hr id="hr-ocultar">  
+            <div id="divProductos" class="d-flex gap-2 flex-wrap">
+                {% for producto in productos  %}
+                <div class="p-2 bg-white apuntar text-center border rounded agregar-producto-pedido" id="producto-div-{{producto.id}}" style="width: 180px; height: 150px;" >
+                    <p style="display: none;">{{producto.id}}-{{producto.nombre}}-{{producto.precio_detal}}-{{producto.unidad}}</p>
+                    <div class="overflow-hidden p-2 text-center" style="width: 100px; height: 100px;">
+                      <img src="{{producto.imagen}}" class="img-fluid rounded-top " alt="" style="width: 200px;">
+                    </div>
+                    <ul class="list-inline">
+                      <li class="list-inline-item text-capitalize"><p class="fw-semibold fs-6">{{producto.nombre}}</p></li>
+                      <li class="list-inline-item text-capitalize"><p class="fs-6 fw-light">{{producto.precio_detal}}$/{{producto.unidad}}</p></li>
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock content %}
