@@ -133,12 +133,16 @@ $(document).ready(function () {
     }
 
     $(".filtrar-por-categoria").on('click', function(){
+
         var textoCategoria = $("#"+ this.id + "> p").text()
         var categoriaInfo = textoCategoria.split('-')
         var categoriaId = categoriaInfo[0]
-
+        if(this.id == "categoria-div-todas"){
+            categoriaId = "0"
+        }
         $.ajax({url: 'filtrar-categorias/', data : {'categoria':categoriaId,}, type: 'POST', dataType:'json',
             success: function (response){
+                console.log(response)
                 $("#divProductos").html("")
                 response.forEach(producto => {
                     productoDiv = `<div class="p-2 bg-white apuntar text-center border rounded agregar-producto-pedido" id="producto-div-${producto.id}" style="width: 180px; height: 150px;" ><p style="display: none;">${producto.id}-${producto.nombre}-${producto.precio}-${producto.unidad}</p><div class="overflow-hidden p-2 text-center" style="width: 100px; height: 100px;"><img src="${producto.imagen}" class="img-fluid rounded-top " alt="" style="width: 200px;"></div><ul class="list-inline"><li class="list-inline-item text-capitalize"><p class="fw-semibold fs-6">${producto.nombre}</p></li><li class="list-inline-item text-capitalize"><p class="fs-6 fw-light">${producto.precio}$/${producto.unidad}</p></li></ul></div>`

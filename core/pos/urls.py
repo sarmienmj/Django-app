@@ -2,6 +2,7 @@ from django.urls import path
 from .views import *
 
 app_name="pos"
+#definimos todas las urls de la App 'pos'
 
 urlpatterns = [
     path('',  PosView.as_view(), name='pos'),

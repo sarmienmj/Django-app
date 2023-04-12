@@ -21,9 +21,6 @@ class Producto(models.Model):
     precio_especial = models.FloatField()
     categoria = models.ManyToManyField(CategoriasProductos)
 
-    def __str__(self):
-        return self.nombre
-
 #clase de relacion entre pedidos y sus productos con sus cantidades y precio a considerar
 class ProductosPedido(models.Model):
     producto = models.IntegerField()
